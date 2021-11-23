@@ -58,30 +58,30 @@ function addTask(item) {
 
     if (item.type === "active") {
         taskChecked.addEventListener("change", () => { data[index].type = "completed"; });
-        taskChecked.addEventListener("change", createTasks);
+        taskChecked.addEventListener("change", render);
         localStorage.setItem("localData", JSON.stringify(data));
         
     }
     if (item.type === "completed") {
         taskChecked.addEventListener("change", () => { data[index].type = "active" });
-        taskChecked.addEventListener("change", createTasks);
+        taskChecked.addEventListener("change", render);
         localStorage.setItem("localData", JSON.stringify(data));
     }
 
 }
 
-function createTasks() {
+function render() {
     let elements = document.querySelectorAll(".task");
     for (let el of elements) {
         el.remove();
     }
     try {
-    let obj = JSON.parse(localStorage["localData"]);
+    let obj = JSON.parse(localStorage.getItem("localData"));
     obj.forEach(addTask);
     } catch(err) {}
     
 }
-createTasks();
+render();
 button.addEventListener("click", () => {
     let newTask = {
         index: data.length,
@@ -92,4 +92,4 @@ button.addEventListener("click", () => {
     input.value = "";
     localStorage.setItem("localData", JSON.stringify(data));
 });
-button.addEventListener("click", createTasks);
+button.addEventListener("click", render);
