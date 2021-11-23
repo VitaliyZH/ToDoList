@@ -3,32 +3,42 @@
 let button = document.querySelector(".add-btn");
 let input = document.querySelector(".input");
 let data;
-if (localStorage["localData"] !== "") {
-    data = JSON.parse(localStorage["localData"]);
-} else { data = {} }
 
-function addTask(text, type) {
+if (localStorage.getItem("localData") !== null) {
+    try {
+    data = JSON.parse(localStorage.getItem("localData"));
+    } catch(err) {}
+} else { 
+    data = [];
+    localStorage.setItem("localData", JSON.stringify(data));
+ }
+ console.log(data);
+
+
+function addTask(item) {
+
     let task = document.createElement("div");
     let taskText = document.createElement("div");
     let taskChecked = document.createElement("input");
     let taskDelete = document.createElement("button");
     let a;
-    if (type === "active") {
+    let index = item.index;
+    if (item.type === "active") {
         a = document.querySelector(".task__active");
     }
-    if (type === "completed") {
+    if (item.type === "completed") {
         a = document.querySelector(".task__completed");
     }
 
-    taskText.innerHTML = text;
+    taskText.innerHTML = item.value;
     task.className = "task";
     taskChecked.type = "checkbox";
     taskDelete.innerHTML = "delete";
-    taskDelete.name = text;
-    if (type === "active") {
+    taskDelete.name = item.value;
+    if (item.type === "active") {
         taskChecked.checked = false;
     }
-    if (type === "completed") {
+    if (item.type === "completed") {
         taskChecked.checked = true;
     }
 
@@ -39,19 +49,23 @@ function addTask(text, type) {
 
     taskDelete.addEventListener("click", () => {
         task.remove();
-        delete data[text];
-        localStorage["localData"] = JSON.stringify(data);
+        data[index].type = "deleted";
+        let newData = data.filter(el => el.type !== "deleted");
+        console.log(newData);
+        
+        localStorage.setItem("localData", JSON.stringify(newData));
     });
 
-    if (type === "active") {
-        taskChecked.addEventListener("change", () => { data[text] = "completed" });
+    if (item.type === "active") {
+        taskChecked.addEventListener("change", () => { data[index].type = "completed"; });
         taskChecked.addEventListener("change", createTasks);
-        localStorage["localData"] = JSON.stringify(data);
+        localStorage.setItem("localData", JSON.stringify(data));
+        
     }
-    if (type === "completed") {
-        taskChecked.addEventListener("change", () => { data[text] = "active" });
+    if (item.type === "completed") {
+        taskChecked.addEventListener("change", () => { data[index].type = "active" });
         taskChecked.addEventListener("change", createTasks);
-        localStorage["localData"] = JSON.stringify(data);
+        localStorage.setItem("localData", JSON.stringify(data));
     }
 
 }
@@ -61,15 +75,21 @@ function createTasks() {
     for (let el of elements) {
         el.remove();
     }
+    try {
     let obj = JSON.parse(localStorage["localData"]);
-    for (let key of Object.keys(obj)) {
-        addTask(key, obj[key]);
-    }
+    obj.forEach(addTask);
+    } catch(err) {}
+    
 }
 createTasks();
 button.addEventListener("click", () => {
-    data[input.value] = "active";
+    let newTask = {
+        index: data.length,
+        value: input.value,
+        type: "active"
+    };
+    data.push(newTask);
     input.value = "";
-    localStorage["localData"] = JSON.stringify(data);
+    localStorage.setItem("localData", JSON.stringify(data));
 });
 button.addEventListener("click", createTasks);
