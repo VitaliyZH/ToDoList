@@ -3,16 +3,17 @@
 let button = document.querySelector(".add-btn");
 let input = document.querySelector(".input");
 let data;
-
+//localStorage.clear();
+//debugger
 if (localStorage.getItem("localData") !== null) {
     try {
-    data = JSON.parse(localStorage.getItem("localData"));
-    } catch(err) {}
-} else { 
+        data = JSON.parse(localStorage.getItem("localData"));
+    } catch (err) {}
+} else {
     data = [];
     localStorage.setItem("localData", JSON.stringify(data));
- }
- console.log(data);
+}
+console.log(data);
 
 
 function addTask(item) {
@@ -52,7 +53,8 @@ function addTask(item) {
         data[index].type = "deleted";
         let newData = data.filter(el => el.type !== "deleted");
         console.log(newData);
-        
+        data = newData;
+
         localStorage.setItem("localData", JSON.stringify(newData));
     });
 
@@ -60,7 +62,7 @@ function addTask(item) {
         taskChecked.addEventListener("change", () => { data[index].type = "completed"; });
         taskChecked.addEventListener("change", render);
         localStorage.setItem("localData", JSON.stringify(data));
-        
+
     }
     if (item.type === "completed") {
         taskChecked.addEventListener("change", () => { data[index].type = "active" });
@@ -75,11 +77,11 @@ function render() {
     for (let el of elements) {
         el.remove();
     }
-    try {
-    let obj = JSON.parse(localStorage.getItem("localData"));
-    obj.forEach(addTask);
-    } catch(err) {}
-    
+
+    for (let i = 0; i < data.length; i++) {
+        addTask(data[i]);
+    }
+
 }
 render();
 button.addEventListener("click", () => {
