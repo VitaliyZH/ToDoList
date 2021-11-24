@@ -1,53 +1,64 @@
 .task {
-    width: 796px;
-    display: flex;
-    font-size: 20px;
-    color: #0e0303;
-    border: 2px solid #e28131;
-    border-radius: 4px;
-    margin: 0;
+  width: 796px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: #0e0303;
+  border: 2px solid #e28131;
+  border-radius: 4px;
+  margin: 0;
 }
 
+.task__buttons {
+  width: 100px;
+  margin: 0;
+}
+
+.task__text-wrapper {
+  width: 650px;
+  margin: 0;
+  display: flex;
+}
 .task-wrapper {
-    max-width: 1600px;
-    margin: 0 auto;
-    display: flex;
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
 }
 
 .task__active {
-    width: 800px;
-    height: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid #000000;
-    border-radius: 4px;
+  width: 800px;
+  height: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #000000;
+  border-radius: 4px;
 }
 
 .task__completed {
-    width: 800px;
-    height: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #000000;
-    border-radius: 4px;
+  width: 800px;
+  height: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000000;
+  border-radius: 4px;
 }
 
 .task__head {
-    width: 796px;
-    display: inline;
-    font-size: 30px;
-    text-align: center;
-    color: #0e0303;
-    border: 2px solid #86c950;
-    border-radius: 4px;
-    margin: 0;
+  width: 796px;
+  display: inline;
+  font-size: 30px;
+  text-align: center;
+  color: #0e0303;
+  border: 2px solid #86c950;
+  border-radius: 4px;
+  margin: 0;
 }
 
 .task-new {
-    max-width: 300px;
-    margin: 0 auto;
-    display: flex;
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
 }
