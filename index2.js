@@ -50,7 +50,8 @@ function addTask(item) {
 
     taskDelete.addEventListener("click", () => {
         task.remove();
-        data[index].type = "deleted";
+        //data[index].type = "deleted";
+        data.find(el => el.index === index).type = "deleted";
         let newData = data.filter(el => el.type !== "deleted");
         console.log(newData);
         data = newData;
@@ -59,13 +60,13 @@ function addTask(item) {
     });
 
     if (item.type === "active") {
-        taskChecked.addEventListener("change", () => { data[index].type = "completed"; });
+        taskChecked.addEventListener("change", () => { data.find(el => el.index === index).type = "completed"; });
         taskChecked.addEventListener("change", render);
         localStorage.setItem("localData", JSON.stringify(data));
 
     }
     if (item.type === "completed") {
-        taskChecked.addEventListener("change", () => { data[index].type = "active" });
+        taskChecked.addEventListener("change", () => { data.find(el => el.index === index).type = "active" });
         taskChecked.addEventListener("change", render);
         localStorage.setItem("localData", JSON.stringify(data));
     }
@@ -78,9 +79,10 @@ function render() {
         el.remove();
     }
 
-    for (let i = 0; i < data.length; i++) {
+    /* for (let i = 0; i < data.length; i++) {
         addTask(data[i]);
-    }
+    } */
+    data.forEach(element => addTask(element));
 
 }
 render();
