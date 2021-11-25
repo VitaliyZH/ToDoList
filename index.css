@@ -1,64 +1,101 @@
 .task {
-  width: 796px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  color: #0e0303;
-  border: 2px solid #e28131;
-  border-radius: 4px;
-  margin: 0;
+    width: 796px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    color: #0e0303;
+    border: 2px solid #e28131;
+    border-radius: 4px;
+    margin: 0;
 }
 
 .task__buttons {
-  width: 100px;
-  margin: 0;
+    width: 100px;
+    margin: 0;
 }
 
 .task__text-wrapper {
-  width: 650px;
-  margin: 0;
-  display: flex;
+    width: 650px;
+    margin: 0;
+    display: flex;
 }
+
 .task-wrapper {
-  max-width: 1600px;
-  margin: 0 auto;
-  display: flex;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
 }
 
 .task__active {
-  width: 800px;
-  height: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #000000;
-  border-radius: 4px;
+    width: 800px;
+    height: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #000000;
+    border-radius: 4px;
 }
 
 .task__completed {
-  width: 800px;
-  height: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #000000;
-  border-radius: 4px;
+    width: 800px;
+    height: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000000;
+    border-radius: 4px;
 }
 
 .task__head {
-  width: 796px;
-  display: inline;
-  font-size: 30px;
-  text-align: center;
-  color: #0e0303;
-  border: 2px solid #86c950;
-  border-radius: 4px;
-  margin: 0;
+    width: 796px;
+    display: inline;
+    font-size: 30px;
+    text-align: center;
+    color: #0e0303;
+    border: 2px solid #86c950;
+    border-radius: 4px;
+    margin: 0;
 }
 
 .task-new {
-  max-width: 300px;
-  margin: 0 auto;
-  display: flex;
+    max-width: 300px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__window {
+    width: 300px;
+    height: 200px;
+    background: rgb(235, 194, 164);
+    display: flex;
+    flex-direction: column;
+}
+
+.modal__window__text-wrapper {
+    width: 300px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal__window__buttons-wrapper {
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
