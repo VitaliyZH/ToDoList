@@ -11,9 +11,13 @@ if (localStorage.getItem("localData") !== null) {
     } catch (err) {}
 } else {
     data = [];
-    localStorage.setItem("localData", JSON.stringify(data));
+    saveData(data);
 }
 console.log(data);
+
+function saveData(arr) {
+    localStorage.setItem("localData", JSON.stringify(arr));
+}
 
 function addTask(item) {
     let task = document.createElement("div");
@@ -60,7 +64,7 @@ function addTask(item) {
         data.find((el) => el.id === index).type = "deleted";
         data = data.filter((el) => el.type !== "deleted");
 
-        localStorage.setItem("localData", JSON.stringify(data));
+        saveData(data);
     });
 
     if (item.type === "active") {
@@ -68,14 +72,14 @@ function addTask(item) {
             data.find((el) => el.id === index).type = "completed";
         });
         taskChecked.addEventListener("change", render);
-        localStorage.setItem("localData", JSON.stringify(data));
+        saveData(data);
     }
     if (item.type === "completed") {
         taskChecked.addEventListener("change", () => {
             data.find((el) => el.id === index).type = "active";
         });
         taskChecked.addEventListener("change", render);
-        localStorage.setItem("localData", JSON.stringify(data));
+        saveData(data);
     }
     taskEdit.addEventListener("click", () => editor(item));
 }
@@ -103,7 +107,7 @@ function createTask() {
     };
     data.push(newTask);
     input.value = "";
-    localStorage.setItem("localData", JSON.stringify(data));
+    saveData(data);
     render();
 }
 
@@ -134,7 +138,7 @@ function editor(item) {
 
     editAccept.addEventListener("click", () => {
         item.value = editText.value;
-        localStorage.setItem("localData", JSON.stringify(data));
+        saveData(data);
         editBack.remove();
         render();
     })
@@ -146,7 +150,7 @@ function editor(item) {
     editText.addEventListener("keydown", (event) => {
         if (event.code === "Enter") {
             item.value = editText.value;
-            localStorage.setItem("localData", JSON.stringify(data));
+            saveData(data);
             editBack.remove();
             render();
         }
